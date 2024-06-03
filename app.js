@@ -1,4 +1,4 @@
-// const fs= require('fs')
+const fs= require('fs')
 // const fs = require('node:fs');
 
 // fs.writeFileSync("notes.txt", 'i am yasmen 2')
@@ -80,3 +80,23 @@ yargs.command({
 
 // console.log(yargs.argv)
 yargs.parse()
+
+
+
+
+// read data and write on json file
+// read data from json
+const data=fs.readFileSync('json.json')
+const originData=data.toString ()
+const jsonData =JSON.parse(originData)
+
+
+jsonData.name="yasmen"
+jsonData.age=24
+
+console.log(jsonData.name)
+
+
+// overwrite on json data
+const newData = JSON.stringify(jsonData)
+fs.writeFileSync('json.json', newData)
