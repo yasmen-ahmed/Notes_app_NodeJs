@@ -4,31 +4,65 @@
 // fs.writeFileSync("notes.txt", 'i am yasmen 2')
 
 
-// append method
-// const fs = require('node:fs');
-
-// try {
-//   fs.appendFileSync('notes.txt', 'data to append');
-//   console.log('The "data to append" was appended to file!');
-// } catch (err) {
-//     console.log('error!');
-// } 
-
-
-// ///
-// const Notes = require('./utils.js')
-// // const name="Ali"
-
-// // const sum =add(4,2)
-// console.log(Notes())
-
-
-// ///////node package /////
-// const validator = require('validator')
-// console.log(validator.isEmail("alo@a"))
-// console.log(validator.isURL("https://www.udemy.com/home/my-courses/learning/?q=node"))
-
-
+const Notes = require('./utils.js')
 const chalk = require('chalk')
-console.log(chalk.green('success!'));
-console.log(chalk.blue.bold('error!'));
+const yargs = require('yargs')
+const command = process.argv[2]
+yargs.version('1.0.0')
+// console.log(process.argv)
+
+
+
+// if(command === 'add'){
+//     console.log('adding note')
+
+// }else if(command === 'remove'){
+//     console.log('removing note')
+
+// }
+
+
+
+//create add
+yargs.command({
+    command:'add',
+    describe:'add a new note',
+    handler:function(){
+        console.log('Adding a new note ')
+    }
+})
+
+
+//create remove
+yargs.command({
+    command:'remove',
+    describe:'remove a new note',
+    handler:function(){
+        console.log('removing a new note ')
+    }
+})
+
+
+// create read
+yargs.command({
+    command:'read',
+    describe:'read a new note',
+    handler:function(){
+        console.log('reading a new note ')
+    }
+})
+
+// create list 
+
+yargs.command({
+    command:'list',
+    describe:'list your notes',
+    handler:function(){
+        console.log('listing out all notes ')
+    }
+})
+
+
+// add ,remove , read ,list 
+
+console.log(yargs.argv)
