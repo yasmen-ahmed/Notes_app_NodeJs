@@ -1,29 +1,15 @@
 const fs= require('fs')
 // const fs = require('node:fs');
-
-// fs.writeFileSync("notes.txt", 'i am yasmen 2')
-
-
-const Notes = require('./utils.js')
+const Notes = require('./notes.js')
 const chalk = require('chalk')
 const yargs = require('yargs')
+const { title, argv } = require('process')
+const { type } = require('os')
 const command = process.argv[2]
 yargs.version('1.0.0')
-// console.log(process.argv)
 
 
-
-// if(command === 'add'){
-//     console.log('adding note')
-
-// }else if(command === 'remove'){
-//     console.log('removing note')
-
-// }
-
-
-
-//create add
+// add
 yargs.command({
     command:'add',
     describe:'add a new note',
@@ -40,8 +26,9 @@ yargs.command({
         }
     },
     handler:function(argv){
-        console.log('Title: '+ argv.title)
-        console.log('Body: '+ argv.body)
+        // console.log('Title: '+ argv.title)
+        // console.log('Body: '+ argv.body)
+        Notes.addNote(argv.title,argv.body)
     }
 })
 
@@ -50,8 +37,16 @@ yargs.command({
 yargs.command({
     command:'remove',
     describe:'remove a new note',
-    handler:function(){
-        console.log('removing a new note ')
+    builder:{
+        title:{
+            describe:"remove note",
+           demandOption:true,
+           type:"string"
+        }
+    },
+    handler:function(argv){
+        // console.log('removing a new note ')
+        Notes.removeNote(argv.title)
     }
 })
 
@@ -75,10 +70,6 @@ yargs.command({
     }
 })
 
-
-// add ,remove , read ,list 
-
-// console.log(yargs.argv)
 yargs.parse()
 
 
@@ -86,17 +77,17 @@ yargs.parse()
 
 // read data and write on json file
 // read data from json
-const data=fs.readFileSync('json.json')
-const originData=data.toString ()
-const jsonData =JSON.parse(originData)
+// const data=fs.readFileSync('json.json')
+// const originData=data.toString ()
+// const jsonData =JSON.parse(originData)
 
 
-jsonData.name="yasmen"
-jsonData.age=24
+// jsonData.name="yasmen"
+// jsonData.age=24
 
-console.log(jsonData.name)
+// console.log(jsonData.name)
 
 
-// overwrite on json data
-const newData = JSON.stringify(jsonData)
-fs.writeFileSync('json.json', newData)
+// // overwrite on json data
+// const newData = JSON.stringify(jsonData)
+// fs.writeFileSync('json.json', newData)
